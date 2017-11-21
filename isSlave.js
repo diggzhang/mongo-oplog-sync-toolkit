@@ -1,0 +1,1 @@
+print(rs.isMaster().ismaster)
