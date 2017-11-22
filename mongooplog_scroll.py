@@ -30,7 +30,7 @@ opsync_status = {
 def fetch_newest_oplog_timestamp(target_uri):
     cmd_fetch_newest_oplog_timestamp = Template('''
 #!/usr/bin/env bash
-mongo --quiet --host $mongo_uri:3717 --authenticationDatabase admin -u root -p $password local --eval 'db.oplog.rs.find({"ns": "onions.users"}, {"ts":1}).sort({"ts": -1}).limit(1)'
+mongo --quiet --host $mongo_uri:3717 --authenticationDatabase admin -u root -p $password local --eval 'db.oplog.rs.find({"ns": "onions.users"}, {"ts":1}).sort({"$natural": -1}).limit(1)'
 ''').substitute(mongo_uri=target_uri, password=mongo_uri.PASSWD)
     file_name = "newestTimestamp.sh"
     with open(file_name, "w") as f:
