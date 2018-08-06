@@ -30,7 +30,12 @@ def mongodump(op_item):
     with open(file_name, "w") as f:
         logging.info(cmd)
         f.write(cmd)
-    subprocess.check_output(['sh', file_name])
+    try:
+        subprocess.check_output(['sh', file_name])
+    except Exception as e:
+        print("FirstTimeDumpFailed " + str(e))
+        subprocess.check_output(['sh', file_name])    
+    
 
 
 def dump_queue():
